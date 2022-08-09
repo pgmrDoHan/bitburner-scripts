@@ -13,8 +13,11 @@ export async function main(ns) {
     }
 
     const serverList = ns.scan(ns.getHostname());
+    const exceptServer = parseInt(await ns.prompt("Which Server except to run hacking Tool. foo, bar ...", {
+        type: "text"
+    })).split(", ");
     for (let i = 0; i < serverList.length; i++) {
-        if (ns.hasRootAccess(serverList[i]) !== false) {
+        if (ns.hasRootAccess(serverList[i]) !== false && exceptServer.indexOf(serverList) !== -1) {
             const [totalRam, ramUsed] = ns.getServerRam(serverList[i]);
             await ns.scp("hackingTool.js", "home", serverList[i]);
             await ns.scp("scriptLib.js", "home", serverList[i]);
