@@ -22,6 +22,7 @@ export async function main(ns) {
             const threadCount = parseInt((totalRam - ramUsed) / ns.getScriptRam("hackingTool.js", "home"))
             if (threadCount > 0) {
                 await ns.scp("hackingTool.js", "home", serverList[i]);
+                await ns.scp("getAllRootAccess.js", "home", serverList[i]);
                 await ns.scp("scriptLib.js", "home", serverList[i]);
                 await ns.exec("hackingTool.js", serverList[i], threadCount, "-S", selectedServer);
             } else {
