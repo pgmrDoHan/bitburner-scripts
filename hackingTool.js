@@ -1,6 +1,6 @@
 import {
 	scrapArgs,
-	hacking
+	serverHacking
 } from './scriptLib';
 
 export async function main(ns) {
@@ -14,7 +14,7 @@ export async function main(ns) {
 	}
 	while (true) {
 		if (ns.hasRootAccess(selectedServer) !== false) {
-			await hacking(ns, selectedServer);
+			await serverHacking(ns, selectedServer);
 		}
 	}
 }

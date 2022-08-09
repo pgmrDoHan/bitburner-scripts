@@ -42,7 +42,7 @@ async function getRootAccess(ns, selectedServer) {
 	}
 }
 
-async function hacking(ns, selectedServer) {
+async function serverHacking(ns, selectedServer) {
 	if (ns.getServerSecurityLevel(selectedServer) > ns.getServerMinSecurityLevel(selectedServer) + 5) {
 		await ns.weaken(selectedServer);
 	} else if (ns.getServerMoneyAvailable(selectedServer) < ns.getServerMaxMoney(selectedServer)) {
@@ -55,5 +55,5 @@ async function hacking(ns, selectedServer) {
 export {
 	scrapArgs,
 	getRootAccess,
-	hacking
+	serverHacking
 }
