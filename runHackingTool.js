@@ -5,8 +5,8 @@ import {
 export async function main(ns) {
     let selectedServer = parseInt(await scrapArgs(ns, "-S"));
     if (selectedServer === -1) {
-        const serverList = ns.scan(ns.getHostname());
-        selectedServer = ns.prompt("Which Server to want to hack?", {
+        const serverList = ns.scan(await ns.getHostname());
+        selectedServer = await ns.prompt("Which Server to want to hack?", {
             type: "select",
             choices: serverList
         });
