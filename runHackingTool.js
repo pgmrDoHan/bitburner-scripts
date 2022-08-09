@@ -25,10 +25,11 @@ export async function main(ns) {
     for (let i = 0; i < serverList.length; i++) {
         if (ns.hasRootAccess(serverList[i]) !== false && exceptServer.split(", ").indexOf(serverList[i]) === -1) {
             const [totalRam, ramUsed] = ns.getServerRam(serverList[i]);
-            const threadCount = parseInt((totalRam - ramUsed-ns.getScriptRam("runHackingTool.js", "home")) / ns.getScriptRam("hackingTool.js", "home"));
+            const threadCount = parseInt((totalRam - ramUsed) / ns.getScriptRam("hackingTool.js", "home"));
             await scpAllScript(ns,serverList[i]);
             if (threadCount > 0) {
                 await ns.exec("getAllRootAccess.js", serverList[i], 1);
+                await ns.asleep(100);
                 await ns.exec("hackingTool.js", serverList[i], threadCount, "-S", selectedServer);
             } else {
                 await ns.print(`[WARNING] Server '${serverList[i]}' should have more Ram.`);
