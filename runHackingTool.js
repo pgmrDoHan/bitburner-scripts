@@ -17,6 +17,7 @@ export async function main(ns) {
         if (ns.hasRootAccess(serverList[i]) !== false) {
             const [totalRam, ramUsed] = ns.getServerRam(serverList[i]);
             await ns.scp("hackingTool.js", "home", serverList[i]);
+            await ns.scp("scriptLib.js", "home", serverList[i]);
             await ns.exec("hackingTool.js", serverList[i], parseInt((totalRam - ramUsed) / ns.getScriptRam("hackingTool.js", "home")), "-S", selectedServer);
         }
     }
