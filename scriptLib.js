@@ -14,27 +14,25 @@ async function getRootAccess(ns, selectedServer) {
 			for (let i = 0; i < ns.getServerNumPortsRequired(selectedServer); i++) {
 				switch (i) {
 					case 0:
-						await ns.nuke(selectedServer);
-						break;
-					case 1:
 						await ns.brutessh(selectedServer);
 						break;
-					case 2:
+					case 1:
 						await ns.ftpcrack(selectedServer);
 						break;
-					case 3:
+					case 2:
 						await ns.relaysmtp(selectedServer);
 						break;
-					case 4:
+					case 3:
 						await ns.httpworm(selectedServer);
 						break;
-					case 5:
+					case 4:
 						await ns.sqlinject(selectedServer);
 						break;
 				}
+				await ns.nuke(selectedServer);
+				ns.print(`[INFO] Get '${selectedServer}' Root Access`);
+				return 1;
 			}
-			ns.print(`[INFO] Get '${selectedServer}' Root Access`);
-			return 1;
 		} catch (e) {
 			ns.print(`[ERROR] ${e.split("|")[6]}`);
 			return -1;
