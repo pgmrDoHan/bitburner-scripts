@@ -23,6 +23,7 @@ export async function main(ns) {
             const threadCount = parseInt((totalRam - ramUsed) / ns.getScriptRam("hackingTool.js", "home"))
             if (threadCount > 0) {
                 await scpAllScript(ns,serverList[i]);
+                await ns.exec("getAllRootAccess.js", serverList[i], 1);
                 await ns.exec("hackingTool.js", serverList[i], threadCount, "-S", selectedServer);
             } else {
                 await ns.print(`[WARNING] Server '${serverList[i]}' should have more Ram.`);
