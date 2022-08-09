@@ -29,10 +29,10 @@ async function getRootAccess(ns, selectedServer) {
 						await ns.sqlinject(selectedServer);
 						break;
 				}
-				await ns.nuke(selectedServer);
-				ns.print(`[INFO] Get '${selectedServer}' Root Access`);
-				return 1;
 			}
+			await ns.nuke(selectedServer);
+			ns.print(`[INFO] Get '${selectedServer}' Root Access`);
+			return 1;
 		} catch (e) {
 			ns.print(`[ERROR] ${e.split("|")[6]}`);
 			return -1;
