@@ -1,6 +1,6 @@
 import {
 	scrapArgs
-} from './lib/scriptLib';
+} from './scriptLib';
 
 export async function main(ns) {
 	let selectedRam = parseInt(await scrapArgs(ns, "-R"));

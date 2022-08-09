@@ -1,6 +1,6 @@
 import {
     scrapArgs
-} from './lib/scriptLib';
+} from './scriptLib';
 
 export async function main(ns) {
     let selectedServer = parseInt(await scrapArgs(ns, "-S"));

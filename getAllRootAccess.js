@@ -1,6 +1,6 @@
 import {
 	getRootAccess
-} from './lib/scriptLib';
+} from './scriptLib';
 
 export async function main(ns) {
 	const serverList = ns.scan(ns.getHostname());
