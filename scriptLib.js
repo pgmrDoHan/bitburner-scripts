@@ -15,6 +15,7 @@ async function getRootAccess(ns, selectedServer) {
 				switch (i) {
 					case 0:
 						await ns.nuke(selectedServer);
+						break;
 					case 1:
 						await ns.brutessh(selectedServer);
 						break;
