@@ -1,5 +1,6 @@
 import {
-    scrapArgs
+    scrapArgs,
+    scpAllScript
 } from './scriptLib';
 
 export async function main(ns) {
@@ -21,9 +22,7 @@ export async function main(ns) {
             const [totalRam, ramUsed] = ns.getServerRam(serverList[i]);
             const threadCount = parseInt((totalRam - ramUsed) / ns.getScriptRam("hackingTool.js", "home"))
             if (threadCount > 0) {
-                await ns.scp("hackingTool.js", "home", serverList[i]);
-                await ns.scp("getAllRootAccess.js", "home", serverList[i]);
-                await ns.scp("scriptLib.js", "home", serverList[i]);
+                await scpAllScript(ns,serverList[i]);
                 await ns.exec("hackingTool.js", serverList[i], threadCount, "-S", selectedServer);
             } else {
                 await ns.print(`[WARNING] Server '${serverList[i]}' should have more Ram.`);

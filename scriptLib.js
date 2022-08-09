@@ -53,8 +53,15 @@ async function serverHacking(ns, selectedServer) {
 	}
 }
 
+async function scpAllScript(ns,selectedServer){
+	await ns.scp("hackingTool.js", "home", selectedServer);
+	await ns.scp("getAllRootAccess.js", "home", selectedServer);
+	await ns.scp("scriptLib.js", "home", selectedServer);
+}
+
 export {
 	scrapArgs,
 	getRootAccess,
-	serverHacking
+	serverHacking,
+	scpAllScript
 }
