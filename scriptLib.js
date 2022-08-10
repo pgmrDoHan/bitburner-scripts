@@ -53,6 +53,18 @@ async function serverHacking(ns, selectedServer) {
 	}
 }
 
+function scanAnalyze(ns, maxDepth = Infinity, device = ns.getHostname()) {
+    let discovered = [device];
+    function scan (device, depth = 1) {
+        if(depth > maxDepth) return {};	
+        const localTargets = ns.scan(device).filter(newDevice => !discovered.includes(newDevice));	
+        discovered = [...discovered, ...localTargets];
+        return localTargets.reduce((acc, device) => ({...acc, [device]: scan(device, depth + 1)}), {});
+    }
+    const network = scan(device);
+    return {"list":discovered.slice(1),"dict":network};
+}
+
 async function scpAllScript(ns,selectedServer){
 	await ns.scp("hackingTool.js", "home", selectedServer);
 	await ns.scp("runHackingTool.js", "home", selectedServer);
@@ -64,5 +76,6 @@ export {
 	scrapArgs,
 	getRootAccess,
 	serverHacking,
-	scpAllScript
+	scpAllScript,
+	scanAnalyze
 }

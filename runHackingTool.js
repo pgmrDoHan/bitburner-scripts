@@ -1,6 +1,7 @@
 import {
     scrapArgs,
-    scpAllScript
+    scpAllScript,
+    scanAnalyze
 } from './scriptLib';
 
 export async function main(ns) {
@@ -18,12 +19,13 @@ export async function main(ns) {
         });
     }
 
-    const serverList = ns.scan(ns.getHostname());
+    const serverList = scanAnalyze(ns)['list'];
     const exceptServer = await ns.prompt("Which Server except to run hacking Tool. foo, bar ...", {
         type: "text"
     })
+    
     for (let i = 0; i < serverList.length; i++) {
-        if (ns.hasRootAccess(serverList[i]) !== false && exceptServer.split(", ").indexOf(serverList[i]) === -1) {
+        if (exceptServer.split(", ").indexOf(serverList[i]) === -1) {
             const [totalRam, ramUsed] = ns.getServerRam(serverList[i]);
             const threadCount = parseInt((totalRam - ramUsed) / ns.getScriptRam("hackingTool.js", "home"));
             await scpAllScript(ns,serverList[i]);
